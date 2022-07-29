@@ -7,8 +7,8 @@ import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.display.FlxGridOverlay;
-import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.addons.transition.FlxTransitionableState;
+import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
@@ -125,10 +125,9 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		changeSelection();
 		reloadCheckboxes();
 
-		#if android
-		addVirtualPad(FULL, A_B_C);
-		addPadCamera();
-		#end
+                #if android
+	        addVirtualPad(FULL, A_B_C);
+                #end
 	}
 
 	public function addOption(option:Option) {
