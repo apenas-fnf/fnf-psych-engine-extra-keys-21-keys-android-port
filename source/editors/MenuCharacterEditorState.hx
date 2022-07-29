@@ -19,11 +19,7 @@ import flixel.addons.ui.FlxUICheckBox;
 import flixel.addons.ui.FlxUIInputText;
 import flixel.addons.ui.FlxUINumericStepper;
 import flixel.addons.ui.FlxUITabMenu;
-#if android
-import android.flixel.FlxButton;
-#else
 import flixel.ui.FlxButton;
-#end
 import MenuCharacter;
 import openfl.net.FileReference;
 import openfl.events.Event;
@@ -85,10 +81,9 @@ class MenuCharacterEditorState extends MusicBeatState
 		FlxG.mouse.visible = true;
 		updateCharTypeBox();
 
-		#if android
-		addVirtualPad(FULL, A_B);
-		_virtualpad.y = -300;
-		#end
+                #if android
+                addVirtualPad(FULL, A_B);
+                #end
 
 		super.create();
 	}
@@ -424,15 +419,15 @@ class MenuCharacterEditorState extends MusicBeatState
 			var splittedImage:Array<String> = imageInputText.text.trim().split('_');
 			var characterName:String = splittedImage[splittedImage.length-1].toLowerCase().replace(' ', '');
 
-			#if android
-			SUtil.saveContent(characterName, ".json", data);
-			#else
+                        #if android
+                        SUtil.saveContent(characterName, ".json", data);
+                        #else
 			_file = new FileReference();
 			_file.addEventListener(Event.COMPLETE, onSaveComplete);
 			_file.addEventListener(Event.CANCEL, onSaveCancel);
 			_file.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
 			_file.save(data, characterName + ".json");
-			#end
+                        #end
 		}
 	}
 

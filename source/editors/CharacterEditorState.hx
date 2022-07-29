@@ -23,11 +23,7 @@ import flixel.addons.ui.FlxUIInputText;
 import flixel.addons.ui.FlxUINumericStepper;
 import flixel.addons.ui.FlxUITabMenu;
 import flixel.addons.ui.FlxUITooltip.FlxUITooltipStyle;
-#if android
-import android.flixel.FlxButton;
-#else
 import flixel.ui.FlxButton;
-#end
 import flixel.ui.FlxSpriteButton;
 import openfl.net.FileReference;
 import openfl.events.Event;
@@ -205,10 +201,10 @@ class CharacterEditorState extends MusicBeatState
 		FlxG.mouse.visible = true;
 		reloadCharacterOptions();
 
-		#if android
+                #if android
 		addVirtualPad(FULL, FULL);
-		addPadCamera();
-		#end
+                addPadCamera();
+                #end
 
 		super.create();
 	}
@@ -786,8 +782,6 @@ class CharacterEditorState extends MusicBeatState
 				char.jsonScale = sender.value;
 				char.setGraphicSize(Std.int(char.width * char.jsonScale));
 				char.updateHitbox();
-				ghostChar.setGraphicSize(Std.int(ghostChar.width * char.jsonScale));
-				ghostChar.updateHitbox();
 				reloadGhost();
 				updatePointerPos();
 
@@ -1051,6 +1045,9 @@ class CharacterEditorState extends MusicBeatState
 		}
 		ghostChar.color = 0xFF666688;
 		ghostChar.antialiasing = char.antialiasing;
+		
+		ghostChar.setGraphicSize(Std.int(ghostChar.width * char.jsonScale));
+		ghostChar.updateHitbox();
 	}
 
 	function reloadCharacterDropDown() {
