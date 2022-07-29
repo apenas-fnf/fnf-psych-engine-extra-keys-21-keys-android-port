@@ -5,7 +5,7 @@ import flixel.graphics.frames.FlxTileFrames;
 import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxPoint;
 import flixel.util.FlxDestroyUtil;
-import android.flixel.FlxButton;
+import flixel.ui.FlxButton;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.graphics.FlxGraphic;
 
@@ -36,8 +36,14 @@ class FlxVirtualPad extends FlxSpriteGroup {
 	public var dPad:FlxSpriteGroup;
 	public var actions:FlxSpriteGroup;
 
-	public function new(DPad:FlxDPadMode, Action:FlxActionMode) {
+	public var orgAlpha:Float = 0.75;
+	public var orgAntialiasing:Bool = true;
+
+	public function new(?DPad:FlxDPadMode, ?Action:FlxActionMode, ?alphaAlt:Float = 0.75, ?antialiasingAlt:Bool = true) {
 		super();
+
+		orgAntialiasing = antialiasingAlt;
+		orgAlpha = alphaAlt;
 
 		dPad = new FlxSpriteGroup();
 		dPad.scrollFactor.set();
@@ -154,12 +160,11 @@ class FlxVirtualPad extends FlxSpriteGroup {
 		button.solid = false;
 		button.immovable = true;
 		button.scrollFactor.set();
-		button.alpha = 0.75;
-		button.antialiasing = ClientPrefs.globalAntialiasing;
+		button.alpha = orgAlpha;
+		button.antialiasing = orgAntialiasing;
 		#if FLX_DEBUG
 		button.ignoreDrawDebug = true;
 		#end
-
 		return button;
 	}
 
